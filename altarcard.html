@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My card - Altar</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap'); /* Import moderního fontu */
+        body {
+            margin: 0;
+            padding: 0;
+            background: #1c1c1c; /* Změna barvy pozadí */
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: linear-gradient(135deg, #2b5876, #4e4376);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
+            width: 35%; /* Zúžení šířky karty */
+            transition: transform 0.8s ease, box-shadow 0.8s ease; /* Zpomalení animace při najetí */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container:hover {
+            transform: scale(1.05); /* Mírné zvýšení při najetí */
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9);
+        }
+
+        .typing-text {
+            font-size: 2em;
+            margin-bottom: 20px;
+            height: 50px;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            display: inline-flex;
+        }
+
+        #static-text {
+            color: white;
+            margin-right: 10px; /* Přidání mezery mezi texty */
+        }
+
+        #dynamic-text {
+            color: #ffcc70;
+            border-right: 2px solid #ffcc70; /* Cursor effect */
+            white-space: nowrap;
+            overflow: hidden;
+            animation: blink 1s step-end infinite alternate; /* Zpomalení blikání */
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-right-color: transparent; }
+        }
+
+        .logos {
+            display: flex;
+            flex-direction: row; /* Uspořádání ikon do řady */
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .logos img {
+            width: 35px; /* Zmenšení ikon sociálních sítí */
+            height: 35px;
+            margin: 0 10px;
+            transition: transform 1.5s ease; /* Zpomalení animace ikon */
+        }
+
+        .logos img:hover {
+            transform: rotate(360deg);
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 1.1em;
+            width: 100%;
+        }
+
+        .avatar {
+            margin-bottom: 20px;
+        }
+
+        .avatar img {
+            width: 120px; /* Zmenšení avataru */
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            transition: border-color 0.3s ease; /* Přidání plynulého přechodu */
+        }
+
+        .avatar img:hover {
+            border-color: #ffcc70; /* Změna barvy okraje avataru při najetí */
+        }
+
+        a {
+            text-decoration: none;
+            color: #ff6b6b;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: white;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="backgroundCanvas"></canvas>
+    <div class="container">
+        <div class="avatar">
+            <img src="http://nahrajhtml.euweb.cz/nahrano/_0ffe640d-3bbd-4e26-9849-c615f7a84a95.jpeg" alt="Tady byl můj Avatar asi se něco nenačteslo...">
+        </div>
+        <div class="typing-text">
+            <span id="static-text">Ahoj, jsem</span><span id="dynamic-text"></span>
+        </div>
+        <div class="logos">
+            <a href="https://discord.com/users/927602065478385715" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord"></a>
+            <a href="https://www.youtube.com/@Altar_cz" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
+            <a href="mailto:support.altar@email.cz"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email"></a>
+            <a href="https://www.instagram.com/doslovaaltar/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384031.png" alt="Instagram"></a>
+        </div>
+        <div class="footer">
+            Ahoj, jsem Altar, tvůrce, programátor a zajímá mě seberozvoj!
+        </div>
+    </div>
+
+    <script>
+        const roles = ["Altar","Pavel", "gamer", "psychology guy", "tvůrce", "youtuber", "developer","člověk co se zdokonaluje každý den"];
+        let index = 0;
+        let charIndex = 0;
+        let currentText = '';
+        let isDeleting = false;
+        const speed = 125; /* Zrychlení animace textu */
+
+        function changeText() {
+            const dynamicText = document.getElementById("dynamic-text");
+
+            if (!isDeleting && charIndex < roles[index].length) {
+                currentText += roles[index].charAt(charIndex);
+                charIndex++;
+            } else if (isDeleting && charIndex > 0) {
+                currentText = currentText.substring(0, currentText.length - 1);
+                charIndex--;
+            }
+
+            dynamicText.textContent = currentText;
+
+            if (!isDeleting && charIndex === roles[index].length) {
+                isDeleting = true;
+                setTimeout(changeText, speed * 10);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                index = (index + 1) % roles.length;
+                setTimeout(changeText, speed);
+            } else {
+                setTimeout(changeText, speed);
+            }
+        }
+
+        changeText();
+
+        // Canvas animation
+        const canvas = document.getElementById('backgroundCanvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const particles = [];
+
+        function createParticle() {
+            return {
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 3 + 1,
+                speedX: Math.random() * 1 - 0.5, /* Zpomalení rychlosti částic */
+                speedY: Math.random() * 1 - 0.5, /* Zpomalení rychlosti částic */
+                color: `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.8)`
+            };
+        }
+
+        for (let i = 0; i < 100; i++) {
+            particles.push(createParticle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.speedX;
+                p.y += p.speedY;
+
+                if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        animateParticles();
+    </script>
+</body>
+</html>
