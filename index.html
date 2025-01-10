@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My card - Altar</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap'); /* Import moderního fontu */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
         body {
             margin: 0;
             padding: 0;
-            background: #1c1c1c; /* Změna barvy pozadí */
+            background: #1c1c1c;
             color: white;
             font-family: 'Roboto', sans-serif;
             display: flex;
@@ -22,26 +22,32 @@
         .container {
             text-align: center;
             background: linear-gradient(135deg, #2b5876, #4e4376);
-            padding: 40px;
+            padding: 30px;
             border-radius: 20px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
-            width: 35%; /* Zúžení šířky karty */
-            transition: transform 0.8s ease, box-shadow 0.8s ease; /* Zpomalení animace při najetí */
+            width: 50%;
+            height: auto;
+            transform: scale(1.0);
+            transition: transform 0.8s ease, box-shadow 0.8s ease;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-direction: column;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Vystředění karty */
         }
 
         .container:hover {
-            transform: scale(1.05); /* Mírné zvýšení při najetí */
+            transform: translate(-50%, -50%) scale(1.05);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9);
         }
 
         .typing-text {
             font-size: 2em;
-            margin-bottom: 20px;
-            height: 50px;
+            margin-bottom: 15px;
+            height: 40px;
             overflow: hidden;
             white-space: nowrap;
             position: relative;
@@ -50,20 +56,15 @@
 
         #static-text {
             color: white;
-            margin-right: 10px; /* Přidání mezery mezi texty */
+            margin-right: 10px;
         }
 
         #dynamic-text {
             color: #ffcc70;
-            border-right: 2px solid #ffcc70; /* Cursor effect */
+            border-right: 2px solid #ffcc70;
             white-space: nowrap;
             overflow: hidden;
-            animation: blink 1s step-end infinite alternate; /* Zpomalení blikání */
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
+            animation: blink 1s step-end infinite alternate;
         }
 
         @keyframes blink {
@@ -72,16 +73,16 @@
 
         .logos {
             display: flex;
-            flex-direction: row; /* Uspořádání ikon do řady */
+            flex-direction: row;
             justify-content: center;
             margin: 20px 0;
         }
 
         .logos img {
-            width: 35px; /* Zmenšení ikon sociálních sítí */
-            height: 35px;
+            width: 40px;
+            height: 40px;
             margin: 0 10px;
-            transition: transform 1.5s ease; /* Zpomalení animace ikon */
+            transition: transform 1.5s ease;
         }
 
         .logos img:hover {
@@ -89,25 +90,25 @@
         }
 
         .footer {
-            margin-top: 20px;
-            font-size: 1.1em;
+            margin-top: 15px;
+            font-size: 1em;
             width: 100%;
         }
 
         .avatar {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .avatar img {
-            width: 120px; /* Zmenšení avataru */
-            height: 120px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             border: 4px solid white;
-            transition: border-color 0.3s ease; /* Přidání plynulého přechodu */
+            transition: border-color 0.3s ease;
         }
 
         .avatar img:hover {
-            border-color: #ffcc70; /* Změna barvy okraje avataru při najetí */
+            border-color: #ffcc70;
         }
 
         a {
@@ -118,6 +119,19 @@
 
         a:hover {
             color: white;
+        }
+
+        .discord-card {
+            width: 50%;
+        }
+
+        .gray-text {
+            color: gray;
+            text-align: center;
+            font-size: 0.8em;
+            position: absolute;
+            bottom: 10px; /* Umístění textu dole */
+            width: 100%;
         }
 
         canvas {
@@ -145,9 +159,15 @@
             <a href="mailto:support.altar@email.cz"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email"></a>
             <a href="https://www.instagram.com/doslovaaltar/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384031.png" alt="Instagram"></a>
         </div>
+        <a href="https://discord.com/users/927602065478385715" target="_blank" class="discord-card">
+            <img src="https://lanyard.cnrad.dev/api/927602065478385715?idleMessage=Pr%C3%A1v%C4%9B%20te%C4%8F%20asi%20nic%20ned%C4%9Bl%C3%A1m&theme=dark&showDisplayName=true&hideDiscrim=false" />
+        </a>
         <div class="footer">
-            Ahoj, jsem Altar, tvůrce, programátor a zajímá mě seberozvoj!
+            Pro zobrazení nejlepšího aktuálního statusu dej f5.
         </div>
+    </div>
+    <div class="gray-text">
+        Altar 2025 not copyright.
     </div>
 
     <script>
@@ -156,7 +176,7 @@
         let charIndex = 0;
         let currentText = '';
         let isDeleting = false;
-        const speed = 125; /* Zrychlení animace textu */
+        const speed = 125;
 
         function changeText() {
             const dynamicText = document.getElementById("dynamic-text");
@@ -185,7 +205,6 @@
 
         changeText();
 
-        // Canvas animation
         const canvas = document.getElementById('backgroundCanvas');
         const ctx = canvas.getContext('2d');
 
@@ -204,8 +223,8 @@
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
                 size: Math.random() * 3 + 1,
-                speedX: Math.random() * 1 - 0.5, /* Zpomalení rychlosti částic */
-                speedY: Math.random() * 1 - 0.5, /* Zpomalení rychlosti částic */
+                speedX: Math.random() * 1 - 0.5,
+                speedY: Math.random() * 1 - 0.5,
                 color: `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.8)`
             };
         }
