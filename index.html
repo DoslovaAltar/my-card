@@ -142,6 +142,39 @@
             height: 100%;
             z-index: -1;
         }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .join-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #28a745;
+            color: white;
+            padding: 20px 30px; /* Made the button larger */
+            border: none;
+            border-radius: 25px; /* Increased border-radius to make it more circular */
+            cursor: pointer;
+            font-size: 1.2em; /* Increased font size */
+            transition: background-color 0.3s; /* Removed transform transition */
+            display: flex;
+            align-items: center;
+            animation: pulse 2s infinite; /* Added pulse animation */
+        }
+
+        .join-button:hover {
+            background-color: #218838;
+        }
+
+        .join-button img {
+            margin-right: 10px;
+            width: 40px; /* Increased image size */
+            height: 40px; /* Increased image size */
+        }
     </style>
 </head>
 <body>
@@ -154,7 +187,7 @@
             <span id="static-text">Ahoj, jsem</span><span id="dynamic-text"></span>
         </div>
         <div class="logos">
-            <a href="https://discord.com/users/927602065478385715" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord"></a>
+            <a href="https://discord.gg/gKbuZKSX" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord"></a>
             <a href="https://www.youtube.com/@Altar_cz" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
             <a href="mailto:support.altar@email.cz"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email"></a>
             <a href="https://www.instagram.com/doslovaaltar/" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384031.png" alt="Instagram"></a>
@@ -169,7 +202,10 @@
     <div class="gray-text">
         Altar 2025 not copyright.
     </div>
-
+    <button class="join-button" onclick="alert('Připojte se k naší komunitě na Discordu!'); window.open('https://discord.gg/gKbuZKSX', '_blank')">
+        <img src="https://raw.githubusercontent.com/DoslovaAltar/my-card-altar/refs/heads/main/images/ALTAR_COMMUNITY.png" alt="Community">
+        Joini naši komunitu💪!
+    </button>
     <script>
         const roles = ["Altar","Pavel", "gamer", "psychology guy", "tvůrce", "youtuber", "developer","člověk co se zdokonaluje každý den"];
         let index = 0;
