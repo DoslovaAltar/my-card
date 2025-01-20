@@ -9,7 +9,7 @@
         body {
             margin: 0;
             padding: 0;
-            background: #1c1c1c;
+            background: linear-gradient(135deg, #1c1c1c, #4e4376);
             color: white;
             font-family: 'Roboto', sans-serif;
             display: flex;
@@ -17,11 +17,19 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
+            animation: gradientBackground 15s ease infinite;
+            background-size: 400% 400%;
+        }
+
+        @keyframes gradientBackground {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
             text-align: center;
-            background: linear-gradient(135deg, #2b5876, #4e4376);
+            background: rgba(0, 0, 0, 0.7);
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7);
@@ -235,7 +243,7 @@
                 index = (index + 1) % roles.length;
                 setTimeout(changeText, speed);
             } else {
-                setTimeout(changeText, speed);
+                setTimeout(changeText, speed);  
             }
         }
 
