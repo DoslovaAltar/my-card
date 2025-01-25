@@ -1,0 +1,55 @@
+/* Existing CSS ... */
+
+/* Responsive design for mobile devices */
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .typing-text {
+        font-size: 1.5em;
+    }
+
+    .logos img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .join-button {
+        padding: 15px 20px;
+        font-size: 1em;
+    }
+
+    .join-button img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* Responsive design for tablets */
+@media (max-width: 900px) {
+    .container {
+        width: 70%;
+        padding: 25px;
+    }
+
+    .typing-text {
+        font-size: 1.75em;
+    }
+
+    .logos img {
+        width: 35px;
+        height: 35px;
+    }
+
+    .join-button {
+        padding: 18px 25px;
+        font-size: 1.1em;
+    }
+
+    .join-button img {
+        width: 35px;
+        height: 35px;
+    }
+}
